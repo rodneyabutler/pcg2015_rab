@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    tenants = [
+        {
+            "name": "Kevin Long",
+            "suite": 111
+        },
+        {
+            "name": "Kay Long",
+            "suite": 112
+        },
+        {
+            "name": "John Long",
+            "suite": 113
+        },
+        {
+            "name": "Jack Richards",
+            "suite": 211
+        },
+        {
+            "name": "Arthur Wright",
+            "suite": 212
+        },
+        {
+            "name": "abc",
+            "suite": 123
+        },
+        {
+            "name": "31 flavors",
+            "suite": 231
+        },
+        {
+            "name": "!@#$%^&*()",
+            "suite": 213
+        }
+    ];
+    var directory = {};
+    for (var i in tenants) {
+        var t = tenants[i];
+        var first_letter = t["name"][0];
+        if (!directory.hasOwnProperty(first_letter)) {
+            directory[first_letter] = [];
+        }
+        directory[first_letter].push(t);
+
+    }
+    for (letter in directory) {
+        var d = directory[letter];
+        document.write("===" + letter + "===" + "<br>");
+        for (i in d) {
+            var t = d[i];
+            document.write(" " + t["name"] + " " + t["suite"] + "<br>");
+        }
+
+    }
+</script>
+</body>
+</html>

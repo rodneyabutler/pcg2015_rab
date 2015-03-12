@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+Store - See Console Log
+<script>
+    /**
+     * DEFINE "CLASSES"
+     */
+    function Store() {
+        function printCustomerHistory() {
+            var store = this;
+            for (var c = 0; c < store.customers.length; c++) {
+                var customer = store.customers[c];
+                console.log(customer.name);
+                for (var r = 0; r < customer.receipts.length; r++) {
+                    var receipt = customer.receipts[r];
+                    var receiptTotal = 0;
+                    for (var l = 0; l < receipt.lines.length; l++) {
+                        var line = receipt.lines[l];
+                        var q = line.quantity;
+                        var productName = line.product.name;
+                        var price = line.price;
+                        var lineTotal = q * price;
+                        receiptTotal += lineTotal;
+                        console.log(q, productName, price, lineTotal);
+                    }
+                    console.log("total", receiptTotal);
+                }
+            }
+        }
+
+        return {
+            customers: [],
+            products: [],
+            printCustomerHistory: printCustomerHistory
+        }
+    }
+
+    function Customer(name) {
+        return {
+            name: name,
+            receipts: []
+        }
+    }
+
+    function Product(name, price, stock) {
+        return {
+            name: name,
+            price: price,
+            stock: stock
+        }
+    }
+
+    function Line(quantity, product) {
+        return {
+            quantity: quantity,
+            product: product,
+            price: product.price
+        }
+    }
+
+    function Receipt(lines) {
+        return {
+            date: new Date(),
+            lines: lines
+        }
+    }
+
+    /**
+     * BEGIN TEST
+     */
+
+    var store = new Store();
+    store.products.push(new Product("Widget", 12.99, 144));
+    store.products.push(new Product("Gadget", 34.99, 144));
+    store.customers.push(new Customer("Kevin"));
+    store.customers.push(new Customer("Carol"));
+
+    var kevin = store.customers[0];
+    kevin.receipts.push(
+            new Receipt([
+                new Line(12, store.products[0]),
+                new Line(12, store.products[1])
+            ])
+    );
+
+    store.printCustomerHistory();
+
+
+</script>
+</body>
+</html>
