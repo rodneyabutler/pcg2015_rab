@@ -43,7 +43,7 @@
     var directory = {};
     for (var i in tenants) {
         var t = tenants[i];
-        var first_letter = t["name"][0];
+        var first_letter = t["name"][0].toLowerCase();
         if (!directory.hasOwnProperty(first_letter)) {
             directory[first_letter] = [];
         }
